@@ -74,9 +74,7 @@ public class SpinnerDialog {
     public void showSpinerDialog() {
         AlertDialog.Builder adb = new AlertDialog.Builder(context);
         View v = context.getLayoutInflater().inflate(R.layout.dialog_layout, null);
-        TextView rippleViewClose = (TextView) v.findViewById(R.id.close);
         TextView title = (TextView) v.findViewById(R.id.spinerTitle);
-        rippleViewClose.setText(closeTitle);
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
         final EditText searchBox = (EditText) v.findViewById(R.id.searchBox);
@@ -118,12 +116,6 @@ public class SpinnerDialog {
             }
         });
 
-        rippleViewClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
         alertDialog.show();
     }
 
