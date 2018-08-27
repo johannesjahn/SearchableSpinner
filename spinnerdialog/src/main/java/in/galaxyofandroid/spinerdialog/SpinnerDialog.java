@@ -23,6 +23,7 @@ public class SpinnerDialog {
     private final ArrayList<String> itemValues = new ArrayList<>();
     private final String dTitle;
     private final int windowAnimationsStyle;
+    private String searchHint = "";
 
     private OnSpinnerItemClickListener onSpinnerItemClickListener;
     private AlertDialog alertDialog;
@@ -35,11 +36,27 @@ public class SpinnerDialog {
         this.windowAnimationsStyle = 0;
     }
 
+    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, String searchHint) {
+        populateDataSet(items);
+        this.context = activity;
+        this.dTitle = dialogTitle;
+        this.windowAnimationsStyle = 0;
+        this.searchHint = searchHint;
+    }
+
     public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, int windowAnimationsStyle) {
         populateDataSet(items);
         this.context = activity;
         this.dTitle = dialogTitle;
         this.windowAnimationsStyle = windowAnimationsStyle;
+    }
+
+    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, int windowAnimationsStyle, String searchHint) {
+        populateDataSet(items);
+        this.context = activity;
+        this.dTitle = dialogTitle;
+        this.windowAnimationsStyle = windowAnimationsStyle;
+        this.searchHint = searchHint;
     }
 
     private void populateDataSet(ArrayList<SpinnerDialogItem> items) {
@@ -61,6 +78,7 @@ public class SpinnerDialog {
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
         final EditText searchBox = (EditText) v.findViewById(R.id.searchBox);
+        searchBox.setHint(searchHint);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.items_view, itemValues);
         listView.setAdapter(adapter);
         adb.setView(v);
