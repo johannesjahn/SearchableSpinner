@@ -22,6 +22,7 @@ public class SpinnerDialog {
     ArrayList<String> items;
     Activity context;
     String dTitle,closeTitle="Close";
+    String searchHintText="";
     OnSpinerItemClick onSpinerItemClick;
     AlertDialog alertDialog;
     int pos;
@@ -56,6 +57,16 @@ public class SpinnerDialog {
         this.closeTitle=closeTitle;
     }
 
+    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, int style,String closeTitle, String searchHintText) {
+        this.items = items;
+        this.context = activity;
+        this.dTitle = dialogTitle;
+        this.style = style;
+        this.closeTitle=closeTitle;
+        this.searchHintText=searchHintText;
+    }
+
+
     public void bindOnSpinerListener(OnSpinerItemClick onSpinerItemClick1) {
         this.onSpinerItemClick = onSpinerItemClick1;
     }
@@ -69,12 +80,12 @@ public class SpinnerDialog {
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
         final EditText searchBox = (EditText) v.findViewById(R.id.searchBox);
+        searchBox.setHint(searchHintText);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.items_view, items);
         listView.setAdapter(adapter);
         adb.setView(v);
         alertDialog = adb.create();
         alertDialog.getWindow().getAttributes().windowAnimations = style;//R.style.DialogAnimations_SmileWindow;
-        alertDialog.setCancelable(false);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
