@@ -24,39 +24,44 @@ public class SpinnerDialog {
     private final String dTitle;
     private final int windowAnimationsStyle;
     private String searchHint = "";
+    private String backText;
 
     private OnSpinnerItemClickListener onSpinnerItemClickListener;
     private AlertDialog alertDialog;
     private int pos;
 
-    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle) {
+    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, String backText) {
         populateDataSet(items);
         this.context = activity;
         this.dTitle = dialogTitle;
         this.windowAnimationsStyle = 0;
+        this.backText = backText;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, String searchHint) {
+    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, String searchHint, String backText) {
         populateDataSet(items);
         this.context = activity;
         this.dTitle = dialogTitle;
         this.windowAnimationsStyle = 0;
         this.searchHint = searchHint;
+        this.backText = backText;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, int windowAnimationsStyle) {
+    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, int windowAnimationsStyle, String backText) {
         populateDataSet(items);
         this.context = activity;
         this.dTitle = dialogTitle;
         this.windowAnimationsStyle = windowAnimationsStyle;
+        this.backText = backText;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, int windowAnimationsStyle, String searchHint) {
+    public SpinnerDialog(Activity activity, ArrayList<SpinnerDialogItem> items, String dialogTitle, int windowAnimationsStyle, String searchHint, String backText) {
         populateDataSet(items);
         this.context = activity;
         this.dTitle = dialogTitle;
         this.windowAnimationsStyle = windowAnimationsStyle;
         this.searchHint = searchHint;
+        this.backText = backText;
     }
 
     private void populateDataSet(ArrayList<SpinnerDialogItem> items) {
@@ -74,6 +79,7 @@ public class SpinnerDialog {
         AlertDialog.Builder adb = new AlertDialog.Builder(context);
         View v = context.getLayoutInflater().inflate(R.layout.dialog_layout, null);
         TextView rippleViewClose = (TextView) v.findViewById(R.id.close);
+        rippleViewClose.setText(backText);
         TextView title = (TextView) v.findViewById(R.id.spinnerTitle);
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
